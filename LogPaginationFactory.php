@@ -43,10 +43,10 @@
 		$min	= min($current, $min);
 		$max	= max($current, $max);
 		$total	= $max - $min + 1;
+		$prev = max($min, $current - 1);
+		$next = min($max, $current + 1);
 		$head	= $current - $min;			// number of pages before the current page
 		$tail	= $max - $current;			// number of pages after the current page
-		$prev	= max(1, $current-1);		// previous page (or page 1)
-		$next	= min($max, $current +1);	// next page (or last page)
 
 		if ($total <= $steps) {
 			/* we have less pages in our list than the maximal number of steps.
@@ -88,10 +88,10 @@
 				}
 				
 				foreach ($elementsBefore as $e) {
-					array_push($elements, $current - $e);
+					array_push($elements, $prev - $e);
 				}
 				foreach ($elementsAfter as $e) {
-					array_push($elements, $current + $e);
+					array_push($elements, $next + $e);
 				}
 			}
 		}

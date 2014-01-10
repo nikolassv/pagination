@@ -69,7 +69,7 @@ class LogStepDivision
 				}
 			}
 
-			$this->stepsSecond	= $s- $this->stepsFirst;
+			$this->stepsSecond	= $s - $this->stepsFirst;
 			$this->stepSum		= $s;
 	}
 
