@@ -41,7 +41,7 @@
 	 * @param	int max	the highest element in the pagination
 	 * @param	int steps	the number of items displayed in the pagination
 	 * @param	int current	the current page
-	 * @param	PaginationIteratorInterface	the new pagination iterator
+	 * @return	PaginationIteratorInterface	the new pagination iterator
 	 */
 	public static function makeNewPagination($max, $steps, $current, $min);
  }

@@ -34,7 +34,17 @@
 
  class LogPaginationFactory implements PaginationFactoryInterface
  {
-	public static function makeNewPagination($max, $steps, $current = 1, $min = 1)
+	/**
+	 * produces a new logarithmic pagination iterator instance
+	 *
+	 * @param	int	min	the lowest element in the pagination
+	 * @param	int max	the highest element in the pagination
+	 * @param	int steps	the number of items displayed in the pagination
+	 * @param	int current	the current page
+	 * @param bool whether to force links to the previous and next page
+	 * @return	PaginationIteratorInterface	the new pagination iterator
+	 */
+	public static function makeNewPagination($max, $steps, $current = 1, $min = 1, $forceLinkNextPrev = true)
 	{
 		if (min($min, $max) < 1) {
 			throw new InvalidArgumentException('logarithmic paginations must begin at page 1 or higher');
@@ -43,8 +53,6 @@
 		$min	= min($current, $min);
 		$max	= max($current, $max);
 		$total	= $max - $min + 1;
-		$prev = max($min, $current - 1);
-		$next = min($max, $current + 1);
 		$head	= $current - $min;			// number of pages before the current page
 		$tail	= $max - $current;			// number of pages after the current page
 
@@ -56,7 +64,7 @@
 		} else {
 
 			// the first, the last, the current, next and prev page belong to the pagination in any case
-			$elements	= array_unique(array((int) $current, (int) $min, (int) $max, (int) $prev, (int) $next));
+			$elements	= array_unique(array((int) $current, (int) $min, (int) $max));
 			$steps		-= count($elements);
 			
 			if ($steps > 0) {
@@ -76,6 +84,22 @@
 					$scale->stepsFirst	= $steps - $scale->stepsSecond;
 				}
 
+				/**
+				 * if we have at least one page before or after the current page we
+				 * make sure that we also have at least one link before resp. after the current
+				 * page
+				 */
+				if ($forceLinkNextPrev && ($steps > 1)) {
+					if (($head > 1) && ($scale->stepsFirst == 0)) {
+						$scale->stepsFirst++;
+						$scale->stepsSecond--;
+					}
+					if (($tail > 1) && ($scale->stepsSecond == 0)) {
+						$scale->stepsFirst--;
+						$scale->stepsSecond++;
+					}
+				}
+
 				if ($scale->stepsFirst > 0) {
 					$elementsBefore = self::getLogSteps($head, $scale->stepsFirst);
 				} else {
@@ -88,10 +112,10 @@
 				}
 				
 				foreach ($elementsBefore as $e) {
-					array_push($elements, $prev - $e);
+					array_push($elements, $current - $e);
 				}
 				foreach ($elementsAfter as $e) {
-					array_push($elements, $next + $e);
+					array_push($elements, $current + $e);
 				}
 			}
 		}
@@ -139,7 +163,7 @@
 		 * if the largest number is equal or less our number of steps we cannot return
 		 * a set of $s disctinct integers. instead we return $n distinct integers.
 		 */
-		if ($n < $s) {
+		if ($n <= $s) {
 			return range($r + 1, $n + $r);
 		}
 
