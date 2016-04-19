@@ -1,7 +1,6 @@
 {
     "name": "nikolassv/pagination",
     "type": "library",
-    "version": "1.0.0",
     "description": "A PHP Library for creating paginations",
     "keywords": ["pagination", "logarithmic pagination"],
     "license": "LGPL-3.0",
@@ -20,12 +19,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Pagination": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Pagination\\Test\\": "tests/"
+            "Pagination": "src"
         }
     }
 }
