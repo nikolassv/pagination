@@ -2,6 +2,8 @@
     "name": "nikolassv/pagination",
     "version": "1.0.0",
     "type": "library",
+    "type": "library",
+    "version": "1.0.0",
     "description": "A PHP Library for creating paginations",
     "keywords": ["pagination", "logarithmic pagination"],
     "license": "LGPL-3.0",
