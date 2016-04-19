@@ -1,4 +1,10 @@
 <?php
+
+namespace Pagination;
+
+use \Pagination\PaginationFactoryInterface;
+use \Pagination\PaginationIterator;
+
 /**************************************************************
  * Copyright notice
  *
@@ -25,7 +31,7 @@
 /**
  * an equal steps pagination class factory
  *
- * pagination made by this factory show pages that are equal steps away 
+ * pagination made by this factory show pages that are equal steps away
  * from each other
  *
  * @author Nikolas Schmidt-Voigt <n.schmidtvoigt@googlemail.com>
@@ -65,16 +71,16 @@
 			for ($i = 1; $i <= $newSteps; $i++) {
 				array_push($elements, (int) round($min + ($i * $stepLength)));
 			}
-			
+
 			/* if any page has been added to the pagination more than once,
 				we have too few steps and need to add aditional steps */
 			$elements = array_unique($elements);
-			$i = 1;		// whether to add an additional step before or after the current page	
+			$i = 1;		// whether to add an additional step before or after the current page
 			$j = 2;		// the distance from $current of the additional step
 			while (count($elements) < $steps) {
 				$additionalStep = $current + ($j * $i);
 				if (($additionalStep > $min) && ($additionalStep < $max)) {
-					array_push($elements, $additionalStep);	
+					array_push($elements, $additionalStep);
 				} elseif (($additionalStep < $min) && ($additionalStep > $max)) {
 					throw new OutOfBoundsException('could not add as much steps to the pagination as needed');
 				}
