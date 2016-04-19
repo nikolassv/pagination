@@ -40,8 +40,8 @@ class PaginationIterator implements PaginationIteratorInterface
 
 	// a list of all pages that this pagination links to
 	protected $elements			= array();
-	protected $pageItemClass	= 'PageItem';
-	protected $gapItemClass		= 'GapItem';
+	protected $pageItemClass	= '\Pagination\PageItem';
+	protected $gapItemClass		= '\Pagination\GapItem';
 
 	// the index of the next element from the elements array
 	protected $index			= 0;
