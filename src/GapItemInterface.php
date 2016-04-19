@@ -1,4 +1,7 @@
 <?php
+
+namespace Pagination;
+
 /**************************************************************
  * Copyright notice
  *
@@ -23,40 +26,15 @@
 
 
 /**
- * interface for pagination iterators
+ * interface for a gap item
  *
- * pagination iterators will iterator over a set of items in a ascending
- * list. for each item it will either return a page item or a gap item.
+ * a pagination iterator will return objects implementing this interface
+ * for gaps in the pagination
  *
  * @author Nikolas Schmidt-Voigt <n.schmidtvoigt@googlemail.com>
  * @license LGPL-3.0 <http://opensource.org/licenses/LGPL-3.0>
  */
 
-interface PaginationIteratorInterface extends Iterator
+interface GapItemInterface
 {
-	/**
-	 * construct a new PaginationIterator object
-	 *
-	 * @param	array	elements	the elements which are shown in the pagination
-	 */
-	public function __construct(array $elements);
-
-	/**
-	 * sets the page item class
-	 * 
-	 * items of the element set will be returned as instances of this class
-	 *
-	 * @param	string	class name of the page items
-	 */
-	public function setPageItemClass($pageItemClass);
-
-	/**
-	 * sets the gap item class
-	 *
-	 * gaps between the elements of the element set will be returned as instances
-	 * of this class
-	 *
-	 * @param	string	class name of the gap items
-	 */
-	public function setGapItemClass($gapItemClass);
 }

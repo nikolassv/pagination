@@ -1,8 +1,7 @@
 <?php
 
-spl_autoload_register(function($classname) {
-	require_once($classname.'.php');
-});
+use \Pagination\LogPaginationFactory;
+use \Pagination\GapItemInterface;
 
 $pagination = LogPaginationFactory::makeNewPagination(112, 7, 2);
 

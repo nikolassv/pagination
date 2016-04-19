@@ -1,9 +1,10 @@
 <?php
-spl_autoload_register(function($classname) {
-	require_once($classname.'.php');
-});
 
-class PaginationTest extends PHPUnit_Framework_TestCase
+namespace Pagination\Tests;
+
+use \Pagination\LogPaginationFactory;
+
+class PaginationTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @dataProvider	provider
@@ -21,7 +22,7 @@ class PaginationTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($numberOfLinks, count($pages), 'number of links did not match: '.$numberOfPages.' '.$numberOfLinks.' '.$currentPage);
 	}
 
-	public function provider () 
+	public function provider ()
 	{
 		return array(
 			array(112, 7, 1),

@@ -1,4 +1,9 @@
 <?php
+
+namespace Pagination;
+
+use \Pagination\PaginationIteratorInterface;
+
 /**************************************************************
  * Copyright notice
  *
@@ -52,7 +57,7 @@ class PaginationIterator implements PaginationIteratorInterface
 		$elements = array_filter($elements, 'is_integer');
 		$elements = array_unique($elements);
 		sort($elements);
-		
+
 		$this->elements = $elements;
 		$this->rewind();
 	}
@@ -106,7 +111,7 @@ class PaginationIterator implements PaginationIteratorInterface
 	{
 		if (!isset($this->elements[$this->index])) {
 			return false;
-		} 
+		}
 
 		$nextPage = $this->elements[$this->index];
 

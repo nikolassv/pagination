@@ -1,4 +1,9 @@
 <?php
+
+namespace Pagination;
+
+use \Pagination\GapItemInterface;
+
 /**************************************************************
  * Copyright notice
  *
@@ -23,28 +28,12 @@
 
 
 /**
- * interface for a page item
- *
- * a pagination iterator will return object implementing this interface
- * for each item in the pagination that links to a page
+ * a simple gap item class
  *
  * @author Nikolas Schmidt-Voigt <n.schmidtvoigt@googlemail.com>
  * @license LGPL-3.0 <http://opensource.org/licenses/LGPL-3.0>
  */
 
-interface PageItemInterface
+class GapItem implements GapItemInterface
 {
-	/**
-	 * constructs a new page item
-	 *
-	 * @param	int	pageNumber	the number of the represented page
-	 */
-	public function __construct($pageNumber);
-
-	/**
-	 * returns the number of the represented page
-	 *
-	 * @return	int	the number of the represented page
-	 */
-	public function getPageNumber();
 }

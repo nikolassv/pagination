@@ -1,4 +1,11 @@
 <?php
+
+namespace Pagination;
+
+use \Pagination\PaginationFactoryInterface;
+use \Pagination\LogStepDivision;
+use \Pagination\PaginationIterator;
+
 /**************************************************************
  * Copyright notice
  *
@@ -66,7 +73,7 @@
 			// the first, the last, the current, next and prev page belong to the pagination in any case
 			$elements	= array_unique(array((int) $current, (int) $min, (int) $max));
 			$steps		-= count($elements);
-			
+
 			if ($steps > 0) {
 				$scale		= new LogStepDivision($head, $tail, $steps);
 				$scale->makeInt();
@@ -110,7 +117,7 @@
 				} else {
 					$elementsAfter	= array();
 				}
-				
+
 				foreach ($elementsBefore as $e) {
 					array_push($elements, $current - $e);
 				}
@@ -128,12 +135,12 @@
 	 * for a given number of steps $s and a given integer $n it will produce a set
 	 * of numbers x^0, x^1, x^2, ... , x^($s - 1) and x^($s - 1) = $n.
 	 *
-	 * this method only returns integer values and always the demanded number of 
+	 * this method only returns integer values and always the demanded number of
 	 * distinct values. if round(x^1) = round(x^2) or round(x^2) = round(x^3) it will decrease both
-	 * the number of steps and the given integer by the same amount and recalculate a new 
+	 * the number of steps and the given integer by the same amount and recalculate a new
 	 * set. the recalculation is recursive. it will keep track of the depth of recursion
 	 * in the parameter $r.
-	 * 
+	 *
 	 * @param	int		n	the size of the largest number
 	 * @param	int		s	the size of the set of number
 	 * @param	int		r	the recursion level
@@ -142,14 +149,14 @@
 	public static function getLogSteps($n, $s, $r = 0)
 	{
 		if (!(
-				is_int($n) 
+				is_int($n)
 			 && is_int($s)
 			)) {
 			throw new InvalidArgumentException('expected integer arguments');
 		}
 
 		if (!(
-				($n > 0) 
+				($n > 0)
 			 && ($s > 0)
 			)) {
 			throw new InvalidArgumentException('expected all arguments to be bigger than zero');
@@ -176,7 +183,7 @@
 		if ($stepSize <= 1.6) {
 			return array_merge(array($r + 1), self::getLogSteps($n - 1, $s - 1, $r + 1));
 		}
-		
+
 		$resultSet = array();
 		for ($i = 0; $i < $s; $i++) {
 			array_push($resultSet, (int) round(pow($stepSize, $i) + $r));

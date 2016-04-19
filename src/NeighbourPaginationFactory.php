@@ -1,4 +1,10 @@
 <?php
+
+namespace Pagination;
+
+use \Pagination\PaginationFactoryInterface;
+use \Pagination\PaginationIterator;
+
 /**************************************************************
  * Copyright notice
  *
@@ -52,14 +58,14 @@
 
 			// calculate how many pages are shown before an after the current page
 			$before = (int) ($steps / 2);
-			
+
 			if ($steps % 2 == 1) {
 				$after = $before + 1;
 			} else {
 				$after = $before;
 			}
 
-			/* take into account that there may not be enough space before or after the 
+			/* take into account that there may not be enough space before or after the
 				current page to show the same number of pages before and after the current
 				page.
 			*/
