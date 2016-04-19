@@ -19,8 +19,8 @@
         "phpunit/phpunit": "*"
     },
     "autoload": {
-        "psr-4": {
-            "Pagination\\": "src/"
+        "psr-0": {
+            "Pagination": "src/"
         }
     },
     "autoload-dev": {
