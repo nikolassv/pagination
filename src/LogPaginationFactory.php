@@ -5,6 +5,7 @@ namespace Pagination;
 use \Pagination\PaginationFactoryInterface;
 use \Pagination\LogStepDivision;
 use \Pagination\PaginationIterator;
+use \InvalidArgumentException;
 
 /**************************************************************
  * Copyright notice
