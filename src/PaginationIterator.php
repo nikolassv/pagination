@@ -90,7 +90,7 @@ class PaginationIterator implements PaginationIteratorInterface
 		$this->gapItemClass = $gapItemClass;
 	}
 
-	public function rewind()
+	public function rewind(): void
 	{
 		$this->index		= 0;
 		$this->position		= 0;
@@ -101,13 +101,13 @@ class PaginationIterator implements PaginationIteratorInterface
 		}
 	}
 
-	public function next()
+	public function next(): void
 	{
 		++$this->index;
 		++$this->position;
 	}
 
-	public function valid()
+	public function valid(): bool
 	{
 		if (!isset($this->elements[$this->index])) {
 			return false;
@@ -127,12 +127,12 @@ class PaginationIterator implements PaginationIteratorInterface
 		return true;
 	}
 
-	public function key()
+	public function key(): mixed
 	{
 		return $this->position;
 	}
 
-	public function current()
+	public function current(): mixed
 	{
 		return $this->currentItem;
 	}
