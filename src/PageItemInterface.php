@@ -1,4 +1,7 @@
 <?php
+
+namespace Pagination;
+
 /**************************************************************
  * Copyright notice
  *
@@ -23,21 +26,28 @@
 
 
 /**
- * a full pagination class factory
+ * interface for a page item
  *
- * paginations made by this factory show each page in the list 
- * without any gaps
+ * a pagination iterator will return object implementing this interface
+ * for each item in the pagination that links to a page
  *
  * @author Nikolas Schmidt-Voigt <n.schmidtvoigt@googlemail.com>
  * @license LGPL-3.0 <http://opensource.org/licenses/LGPL-3.0>
  */
 
- class FullPaginationFactory implements PaginationFactoryInterface
- {
-	public static function makeNewPagination($max, $steps = 1, $current = 1, $min = 1)
-	{
-		$elements = range((int) $min, (int) $max);
-		return new PaginationIterator($elements);
-	}
- }
+interface PageItemInterface
+{
+	/**
+	 * constructs a new page item
+	 *
+	 * @param	int	pageNumber	the number of the represented page
+	 */
+	public function __construct($pageNumber);
 
+	/**
+	 * returns the number of the represented page
+	 *
+	 * @return	int	the number of the represented page
+	 */
+	public function getPageNumber();
+}

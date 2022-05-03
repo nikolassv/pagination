@@ -1,4 +1,9 @@
 <?php
+
+namespace Pagination;
+
+use \Pagination\PaginationIteratorInterface;
+
 /**************************************************************
  * Copyright notice
  *
@@ -35,8 +40,8 @@ class PaginationIterator implements PaginationIteratorInterface
 
 	// a list of all pages that this pagination links to
 	protected $elements			= array();
-	protected $pageItemClass	= 'PageItem';
-	protected $gapItemClass		= 'GapItem';
+	protected $pageItemClass	= '\Pagination\PageItem';
+	protected $gapItemClass		= '\Pagination\GapItem';
 
 	// the index of the next element from the elements array
 	protected $index			= 0;
@@ -52,7 +57,7 @@ class PaginationIterator implements PaginationIteratorInterface
 		$elements = array_filter($elements, 'is_integer');
 		$elements = array_unique($elements);
 		sort($elements);
-		
+
 		$this->elements = $elements;
 		$this->rewind();
 	}
@@ -85,7 +90,7 @@ class PaginationIterator implements PaginationIteratorInterface
 		$this->gapItemClass = $gapItemClass;
 	}
 
-	public function rewind()
+	public function rewind(): void
 	{
 		$this->index		= 0;
 		$this->position		= 0;
@@ -96,17 +101,17 @@ class PaginationIterator implements PaginationIteratorInterface
 		}
 	}
 
-	public function next()
+	public function next(): void
 	{
 		++$this->index;
 		++$this->position;
 	}
 
-	public function valid()
+	public function valid(): bool
 	{
 		if (!isset($this->elements[$this->index])) {
 			return false;
-		} 
+		}
 
 		$nextPage = $this->elements[$this->index];
 
@@ -122,12 +127,12 @@ class PaginationIterator implements PaginationIteratorInterface
 		return true;
 	}
 
-	public function key()
+	public function key(): mixed
 	{
 		return $this->position;
 	}
 
-	public function current()
+	public function current(): mixed
 	{
 		return $this->currentItem;
 	}

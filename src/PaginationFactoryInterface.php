@@ -1,4 +1,7 @@
 <?php
+
+namespace Pagination;
+
 /**************************************************************
  * Copyright notice
  *
@@ -23,15 +26,27 @@
 
 
 /**
- * interface for a gap item
+ * the pagination factory interface
  *
- * a pagination iterator will return objects implementing this interface
- * for gaps in the pagination
+ * pagination factories produce pagination iterator instances and fill them
+ * with the appropriate values
  *
  * @author Nikolas Schmidt-Voigt <n.schmidtvoigt@googlemail.com>
  * @license LGPL-3.0 <http://opensource.org/licenses/LGPL-3.0>
  */
 
-interface GapItemInterface
-{
-}
+ interface PaginationFactoryInterface
+ {
+	/**
+	 * produces a new pagination iterator instance
+	 *
+	 * @param	int	min	the lowest element in the pagination
+	 * @param	int max	the highest element in the pagination
+	 * @param	int steps	the number of items displayed in the pagination
+	 * @param	int current	the current page
+	 * @return	PaginationIteratorInterface	the new pagination iterator
+	 */
+	public static function makeNewPagination($max, $steps, $current, $min);
+ }
+
+

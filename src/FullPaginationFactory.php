@@ -1,4 +1,10 @@
 <?php
+
+namespace Pagination;
+
+use \Pagination\PaginationFactoryInterface;
+use \Pagination\PaginationIterator;
+
 /**************************************************************
  * Copyright notice
  *
@@ -23,12 +29,21 @@
 
 
 /**
- * a simple gap item class
+ * a full pagination class factory
+ *
+ * paginations made by this factory show each page in the list
+ * without any gaps
  *
  * @author Nikolas Schmidt-Voigt <n.schmidtvoigt@googlemail.com>
  * @license LGPL-3.0 <http://opensource.org/licenses/LGPL-3.0>
  */
 
-class GapItem implements GapItemInterface
-{
-}
+ class FullPaginationFactory implements PaginationFactoryInterface
+ {
+	public static function makeNewPagination($max, $steps = 1, $current = 1, $min = 1)
+	{
+		$elements = range((int) $min, (int) $max);
+		return new PaginationIterator($elements);
+	}
+ }
+

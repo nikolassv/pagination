@@ -1,4 +1,7 @@
 <?php
+
+namespace Pagination;
+
 /**************************************************************
  * Copyright notice
  *
@@ -23,9 +26,9 @@
 
 /**
  * a log division object
- * 
+ *
  * for two intervalls $first and $second and a given number $s it calculates
- * two number $a and $b such that $a + $b = $s and $x^$a = $first and 
+ * two number $a and $b such that $a + $b = $s and $x^$a = $first and
  * $x^$b = $second
  *
  * @author Nikolas Schmidt-Voigt <n.schmidtvoigt@googlemail.com>
@@ -43,16 +46,16 @@ class LogStepDivision
 	 *
 	 * @param	int	first	the size of the first set
 	 * @param	int	second	the size of the second set
-	 * @param	int	s		the total number of steps 
+	 * @param	int	s		the total number of steps
 	 */
 	public function __construct($first, $second, $s)
 	{
 			if (!(is_numeric($first)
 					&& is_numeric($second)
 					&& is_numeric($s))) {
-				throw new InvalidArgumentException('expected numerical arguments');		
+				throw new InvalidArgumentException('expected numerical arguments');
 			}
-			
+
 			if ($s <= 0) {
 				throw new InvalidArgumentException('number of steps must be bigger than zero');
 			}
